@@ -170,6 +170,7 @@ function ContactSection(){
         </div>
      
         {/* Schedule, Time and Heads */}
+        {/* boi binalik ko yung label ng time at day wag mo na abaguhin */}
         <div className="group schedule-time-heads">
           <label htmlFor="#appointment-schedule">
             <p className="txt-label">{appointmentDate}</p>
@@ -217,6 +218,7 @@ function ContactSection(){
           </select>
 
           {/* Barangay Selection */}
+          {/* binago ko ulit ito, dapat naka disable ang select kapag walang selected na municipal */}
           <select id="barangay" name="barangay" disabled={!municipality}>
             <option value="">Barangay</option>
             {barangays.map((barangay) => (
