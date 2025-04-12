@@ -2,7 +2,7 @@
   position: relative;
   background-color: rgba(23, 204, 104, 0.4);
   color: var(--background-color);
-  height: clamp(600px, 80vw, 1024px);
+  height: clamp(600px, 100vw, 1250px);
   padding: 160px 8% 0 8%;
 }
 
@@ -53,7 +53,7 @@
   border-radius: 15px;
   width: fit-content;
   text-align: center;
-  max-width: 512px;
+  max-width: 525px;
   padding: 4%;
   padding-top: 4rem;
   margin-inline: auto;
@@ -72,6 +72,13 @@
   margin-bottom: 1.3rem;
 }
 
+.appointment-form .text-header{
+  text-align: left;
+  font-size: 20px;
+  font-weight: 500;
+  margin-top: 0.5rem;
+}
+
 .appointment-form select{
   appearance: none; /* Removes default arrow */
   -webkit-appearance: none; /* For Safari */
@@ -86,7 +93,7 @@
 
 .appointment-form select,
 .appointment-form input,
-textarea{
+.appointment-form textarea{
   width: 100%;
   background-color: rgba(19, 187, 97, 0.3);
   border: none;
@@ -94,16 +101,6 @@ textarea{
   padding: 1rem;
   padding-left: 0.5rem;
   margin-bottom: 1rem;
-}
-
-/* Text Header */
-.text-header {
-  text-align: left;
-  font-weight: 600;
-}
-.swine-gender label {
-  display: block;
-  text-align: left;
 }
 
 .appointment-form select,
@@ -121,10 +118,69 @@ textarea{
   width: 100%;
 }
 
-
 .appointment-form .group{
   display: flex;
   flex-direction: column;
+}
+
+.appointment-form label{
+  text-align: left;
+  font-size: var(--appointmentForm-inputLabel-fSize);
+}
+
+.symptoms-txt-erea{
+  width: 100%;
+  height: 10rem;
+}
+
+/* custom style for swine Genders and Swine age  */
+.swine-genders{
+  display: flex;
+  gap: 0.9rem;
+}
+
+
+/* custom style for schedule, time and heads */
+.appointment-form .group.schedule-time-heads{
+  display: grid;
+  grid-template-columns: 100%;
+  margin-bottom: 1rem;
+}
+
+.appointment-form .group #appointment-schedule,
+.appointment-form .group #time{
+  color: rgba(19, 187, 97, 0);
+}
+
+.appointment-form .group.schedule-time-heads label{
+  position: relative;
+  display: block;
+  font-size: var(--appointmentForm-inputLabel-fSize);
+  margin-bottom: 1rem;
+  border-radius: 8px;
+}
+
+.appointment-form .group.schedule-time-heads input{
+  position: relative;
+  margin-bottom: 0;
+  border-radius: 8px;
+  height: fit-content;
+}
+
+.appointment-form .group.schedule-time-heads label .txt-label{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: fit-content;
+  text-align: left;
+}
+
+.appointment-form .group.schedule-time-heads label:first-child .txt-label{
+  left: 0.7rem;
+}
+
+.appointment-form .group.schedule-time-heads label:nth-child(2) .txt-label{
+  left: 0.7rem;
 }
 
 .appointment-form .submit-btn{
@@ -138,31 +194,13 @@ textarea{
   background-color: #13BB61;
   margin-top: 1rem;
 }
-.submit-btn {
+
+#time, #appointment, #pig-type, #appointment-schedule, #municipality, #barangay, .submit-btn {
   cursor: pointer;
 }
-.submit-btn:hover {
-  background-color: #00813c;
-}
-.loader {
-  margin-top: 10px;
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #007BFF;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  animation: spin 0.8s linear infinite;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
 
 
-@media(width > 480px){
+@media(width > 25rem /*400px*/){
   .appointment-form{
     top: 80%;
   }
@@ -177,7 +215,6 @@ textarea{
     gap: 1rem;
   }
 
-  .appointment-form .group #appointment-schedule,
   .appointment-form .group #appointment{
     width: 150%;
   }
@@ -189,10 +226,44 @@ textarea{
   .appointment-form input{
     padding-left: 1.5rem;
   }
+
+  .appointment-form .group.schedule-time-heads{
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    column-gap: 1rem;
+    row-gap: 0rem;
+  }
+
+  .appointment-form .group.schedule-time-heads input{
+    width: 100%;
+  }
+
+  .appointment-form .group.schedule-time-heads label:first-child .text{
+    left:  3.5rem;
+  }
+  
+  .appointment-form .group.schedule-time-heads label:nth-child(2) .text{
+    left: 2.1rem;
+  }
 }
 
 
-@media(width > 1200px){
+@media(width > 59.375rem /*950px*/){
+  .appointment-form .group.schedule-time-heads{
+    display: grid;
+    grid-template-columns: 1.7fr 1fr;
+    gap: 1rem;
+  }
+}
+
+@media(width > 62.5rem /*1000px*/){
+  .appointment-form .group.schedule-time-heads label:first-child .text{
+    left:  23%;
+  }
+}
+
+
+@media(width > 75rem /*1200px*/){
   #contact-section{
     display: flex;
     justify-content: space-between;
@@ -206,7 +277,7 @@ textarea{
     left: auto;
     right: auto;
     top: auto;
-    padding: 2%;
+    padding: 1.7%;
     padding-bottom: 4rem;
     margin-inline: 0px;
   }
@@ -214,5 +285,20 @@ textarea{
   .appointment-form select,
   .appointment-form input{
     border-radius: 0px;
+  }
+
+  .appointment-form .group.schedule-time-heads{
+    display: grid;
+    grid-template-columns: 4.5fr 21% 1.9fr;
+    gap: 1rem;
+  }
+
+  .appointment-form .group.schedule-time-heads label .text{
+    top: 47%;
+  }
+
+  .appointment-form .group.schedule-time-heads label:first-child .text{
+    left:  46%;
+    width: 80%;
   }
 }

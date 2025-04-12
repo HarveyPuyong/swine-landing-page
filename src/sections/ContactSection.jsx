@@ -3,17 +3,26 @@ import "./../styles/sectionsStyle/contact-section.css"
 import addresses from "./../../data/adresses.json"
 import services from "./../../data/services.json"
 import swines from "./../../data/swines.json"
-import { Link } from "react-router-dom";
 import axios from "axios"
 import Swal from "sweetalert2";
+
+
+function alertMsg (iconTxt, titleTxt, txtText){
+  Swal.fire({
+    icon: iconTxt,
+    title: titleTxt,
+    text: txtText,
+  });
+}
+
 
 function ContactSection(){
   // Swine Information:
   const [appointmentTitle, setAppointmentTitle] = useState("");
   const [swineType, setSwineType] = useState("");
   const [swineCount, setSwineCount] = useState("");
-  const [appointmentDate, setSchedule] = useState("");
-  const [appointmentTime, setTime] = useState("");
+  const [appointmentDate, setSchedule] = useState("Date");
+  const [appointmentTime, setTime] = useState("Time");
   const [swineSymptoms, setSwineSymptoms] = useState("");
   const [swineAge, setSwineAge] = useState("");
   const [swineMale, setSwineMale] = useState("");
@@ -28,6 +37,8 @@ function ContactSection(){
   const appointmentStatus = "pending";
   const [loading, setLoading] = useState(false); 
 
+  
+  // Handle Municipality Change
   const handleMunicipalityChange = (event) => {
     const municipality = event.target.value;
     setSelectedMunicipality(municipality);
@@ -132,9 +143,7 @@ function ContactSection(){
             Health of your <br />
             Swine
         </h1>
-        <p className="inform-txt">
-          Always be informed and updated to the <br /> services  we provide by joining our community.
-        </p>
+        <p className="inform-txt">Always be informed and updated to the <br /> services  we provide by joining our community.</p>
         <button className="join-btn">Join Now!</button>
       </div>
 
@@ -142,16 +151,16 @@ function ContactSection(){
         <h3 className="heading">Send Your Appointment</h3>
         <p className="reminder-txt">Please ensure all text fields are properly filled out before submitting your appointment request.</p>
 
-        <p className="text-header">Swine Information: </p>
+        <p className="text-header">Swine Information:</p>
+
+        {/* {Select appointment and Appointment type} */}
         <div className="group">
-          {/*select appointment*/}
           <select id="appointment" name="appointment" onChange={handleAppointmentChange}>
             <option value="">Select Appointment</option>
             {services.Services.appointmentServices.map((service, index) => (
               <option key={index} value={service.toLowerCase()}>{service}</option>
             ))}
           </select>
-
           <select id="pig-type" name="pig-type" onChange={handleSwineChange}>
             <option value="">Swine Type</option>
             {swines.SwineType.swines.map((swine, index) => (
@@ -159,54 +168,61 @@ function ContactSection(){
               ))}
           </select>
         </div>
-       
-        <div className="group">
-          {/*appointment schedule*/}
-          <input type="date" id="appointment-schedule" name="schedule" onChange={(e) => setSchedule(e.target.value)}/>
-          <input type="time" id="time" name="time" onChange={(e) => setTime(e.target.value)}/>
-          <input type="number" name="heads" id="heads" placeholder="Heads" min={1} onChange={(e) => setSwineCount(e.target.value)}/>
+     
+        {/* Schedule, Time and Heads */}
+        <div className="group schedule-time-heads">
+          <label htmlFor="#appointment-schedule">
+            <p className="txt-label">{appointmentDate}</p>
+            <input type="date" id="appointment-schedule" name="schedule" onChange={(e) => setSchedule(e.target.value)} />
+          </label>
+          <label htmlFor="#time">
+            <p className="txt-label">{appointmentTime}</p>
+            <input type="time" id="time" name="time" onChange={(e) => setTime(e.target.value)} />
+          </label>  
+          <input type="number" placeholder="Heads" />    
         </div>
 
-        <div className="group ">
-          <textarea id="symptoms" required placeholder="Kindly write down the symptoms" onChange={(e) => setSwineSymptoms(e.target.value)}></textarea>
-          
-        </div>
+        {/* symptoms text-area */}
+        <textarea className="symptoms-txt-erea" id="symptoms" required placeholder="Kindly write down the symptoms of your swines" onChange={(e) => setSwineSymptoms(e.target.value)}></textarea>       
 
-        {/* Swine Gender */}
+        {/* Swine Genders and Swine age  */}
         <p className="text-header">Swine Gender:</p>
-        <div className="group gender">
-          <div className="swine-gender">
-            <label htmlFor="male">Male</label>
-            <input type="number" name="male" id="male" min={0} placeholder="0" onChange={(e) => setSwineMale(e.target.value)} required/>
+        <div className="group">
+          <div className="swine-genders">
+            <label htmlFor="male">
+              Male
+              <input type="number" name="male" id="male" min={0} placeholder="0" onChange={(e) => setSwineMale(e.target.value)} required/>
+            </label>     
+            <label htmlFor="female">
+              Female
+              <input type="number" name="female" id="female" min={0} placeholder="0" onChange={(e) => setSwineFemale(e.target.value)} required/>
+            </label>         
           </div>
-          <div className="swine-gender">
-            <label htmlFor="female">Female</label>
-            <input type="number" name="female" id="female" min={0} placeholder="0" onChange={(e) => setSwineFemale(e.target.value)} required/>
-          </div>
-          <div className="swine-gender">
-            <label htmlFor="swine-age">Swine Age:</label>
-            <input type="number" min={0} name="swine-age" id="swine-age" placeholder="months old" required onChange={(e) => setSwineAge(e.target.value)}/>
-          </div>
+            <label htmlFor="swine-age">
+              Swine Age:
+              <input type="number" min={0} name="swine-age" id="swine-age" placeholder="months old" required onChange={(e) => setSwineAge(e.target.value)}/>
+            </label>      
         </div>
 
-        <p className="text-header">Client Information: </p>
+        <p className="text-header">Client Information:</p>
         <div className="group">
-           {/* Select Municipality */}
-           <select id="municipality" name="municipality" onChange={handleMunicipalityChange}>
-            <option value="">Municipality</option>
-            <option value="Boac">Boac</option>
-            <option value="Gasan">Gasan</option>
-            <option value="Mogpog">Mogpog</option>
-            <option value="SantaCruz">Sta Cruz</option>
-            <option value="Torrijos">Torrijos</option>
-            <option value="Buenavista">Buenavista</option>
+          {/* Municipality Selection */}
+          <select id="municipality" name="municipality" onChange={handleMunicipalityChange}>
+            <option value="">Select Municipality</option>
+            {Object.keys(addresses.Municipals).map((municipality) => (
+              <option key={municipality} value={municipality}>
+                {municipality}
+              </option>
+            ))}
           </select>
 
-          {/* Select Barangay */}
-          <select id="barangay" name="barangay">
+          {/* Barangay Selection */}
+          <select id="barangay" name="barangay" disabled={!municipality}>
             <option value="">Barangay</option>
-            {barangays.map((barangay, index) => (
-              <option key={index} value={barangay.toLowerCase()}>{barangay}</option>
+            {barangays.map((barangay) => (
+              <option key={barangay} value={barangay}>
+                {barangay}
+              </option>
             ))}
           </select>
         </div>
@@ -226,12 +242,6 @@ function ContactSection(){
     </section>
   )
 }
-function alertMsg (iconTxt, titleTxt, txtText){
-  Swal.fire({
-    icon: iconTxt,
-    title: titleTxt,
-    text: txtText,
-  });
-}
+
 
 export default ContactSection

@@ -5,7 +5,7 @@ footer{
   font-size: var(--footer-fSize);
   background-color: var(--primary-color);
   color: var(--background-color);
-  padding: 60rem 12% 1.5rem 12%;
+  padding: 90rem 12% 1.5rem 12%;
 }
 
 footer .column1{
@@ -44,9 +44,9 @@ footer .socmed-list ul .socmed-icon{
 }
 
 
-@media(width > 480px){
+@media (width > 400px) {
   footer{
-    padding-top: 40rem;
+    padding-top: 80rem;
   }
 }
 
@@ -55,7 +55,7 @@ footer .socmed-list ul .socmed-icon{
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 50rem 8% 3rem 8%;
+    padding: 80rem 8% 3rem 8%;
   }
 }
 
