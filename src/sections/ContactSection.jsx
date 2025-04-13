@@ -15,6 +15,7 @@ function alertMsg (iconTxt, titleTxt, txtText){
   });
 }
 
+// Wag mo na abaguhin yung styles hahaha nahirapan ako ibalik daming nabago sa css
 
 function ContactSection(){
   // Swine Information:
