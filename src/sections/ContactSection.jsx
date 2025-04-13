@@ -131,6 +131,20 @@ function ContactSection(){
     const icon = 'error';
     const title = 'Appointment Sending Failed';
     const text = 'Appointment was not sent!';
+    alertMsg(icon, title, text);
+
+     // Check if it's a 429 error (rate limit reached)
+     if (err.response && err.response.status === 429) {
+      const icon = 'warning';
+      const title = 'Rate Limit Exceeded';
+      const text = 'Too many requests. Please try again later.';
+      alertMsg(icon, title, text);
+    } else {
+      const icon = 'error';
+      const title = 'Appointment Sending Failed';
+      const text = 'Appointment was not sent!';
+      alertMsg(icon, title, text);
+    }
   });
 
   console.log("Appointment Data Submitted:", appointmentData);
@@ -181,11 +195,11 @@ function ContactSection(){
             <p className="txt-label">{appointmentTime}</p>
             <input type="time" id="time" name="time" onChange={(e) => setTime(e.target.value)} />
           </label>  
-          <input type="number" placeholder="Heads" />    
+          <input type="number" placeholder="Heads" value={swineCount} onChange={(e) => setSwineCount(e.target.value)} required/>   
         </div>
 
         {/* symptoms text-area */}
-        <textarea className="symptoms-txt-erea" id="symptoms" required placeholder="Kindly write down the symptoms of your swines" onChange={(e) => setSwineSymptoms(e.target.value)}></textarea>       
+        <textarea className="symptoms-txt-erea" id="symptoms" required placeholder="Kindly write down the Note or Symptoms of your swines" onChange={(e) => setSwineSymptoms(e.target.value)}></textarea>       
 
         {/* Swine Genders and Swine age  */}
         <p className="text-header">Swine Gender:</p>
