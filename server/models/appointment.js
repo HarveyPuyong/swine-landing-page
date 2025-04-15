@@ -12,14 +12,19 @@ const appointmentSchema = new mongoose.Schema({
     swineMale: { type: String, required: true },
     swineFemale: { type: String, required: true },
 
-    appointmentStatus: { type: String, required: true },
-
     municipality: { type: String, required: true },
     barangay: { type: String, required: true },
 
     clientName: { type: String, required: true },
     clientContact: { type: String, required: true },
-    clientEmail: { type: String, required: true }
+    clientEmail: { type: String, required: true },
+
+    appointmentStatus: { type: String, default: 'pending' },
+    vetPersonnel: { type: String, default: 'Not Set' },
+    medicine: { type: String, default: 'Not Set' },
+    dosage: { type: String, default: 'Not Set' },
+    vetMessage: { type: String, default: 'No message yet' }
+
 }, { collection: 'appointment_tbl' });
 
 export default mongoose.model('AppointmentRequest', appointmentSchema);  // Use ES export syntaxd'/er4/;"

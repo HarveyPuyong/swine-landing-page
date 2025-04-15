@@ -35,7 +35,6 @@ function ContactSection(){
   const [clientName, setClientName] = useState("");
   const [clientEmail, setClientEmail] = useState("");
   const [clientContact, setClientContact] = useState("");
-  const appointmentStatus = "pending";
   const [loading, setLoading] = useState(false); 
 
   
@@ -105,7 +104,6 @@ function ContactSection(){
       swineAge,
       swineMale,
       swineFemale,
-      appointmentStatus,
       municipality,
       barangay: e.target.barangay.value,
       clientName,
